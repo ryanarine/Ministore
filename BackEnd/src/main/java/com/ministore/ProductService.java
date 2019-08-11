@@ -33,4 +33,10 @@ public class ProductService {
 		pr.findAll().forEach(res :: add);
 		return res;
 	}
+	
+	public List<Product> filter(String category) {
+		List<Product> res = new ArrayList<>();
+		pr.findByCategory(category).forEach(res :: add);
+		return res;
+	}
 }

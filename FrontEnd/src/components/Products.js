@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Product from './Product'
+import Product from './Product';
+import Categories from './Categories';
 
 class Products extends Component {
     constructor() {
@@ -8,13 +9,28 @@ class Products extends Component {
         this.state = {
             products: []
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.filterCategory = this.filterCategory.bind(this);
     }
-    getproducts() {
-        axios.get('http://localhost:8080/Allproduct').then(response => {
-            this.setState({ products: response.data }, () => {
-                console.log(this.state);
+
+    handleSubmit(event) {
+        // value of category list
+        let category = event.target.childNodes[0].value;
+        this.filterCategory(category);
+        event.preventDefault();
+    }
+
+    filterCategory(category) {
+        if (category === "") {
+            this.componentDidMount();
+        }
+        else {
+            axios.get('http://localhost:8080/product/filter/' + category).then(response => {
+                this.setState({ products: response.data }, () => {
+                    //console.log(this.state);
+                })
             })
-        })
+        }
     }
             
     render() {
@@ -26,6 +42,10 @@ class Products extends Component {
         return (
             <div>
                 <h1>Products</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <Categories />
+                    <input type="submit" value="Submit" />
+                </form>
                 <ul>
                     {productItem}
                 </ul>
@@ -34,7 +54,11 @@ class Products extends Component {
     }
 
     componentDidMount() {
-        this.getproducts();
+        axios.get('http://localhost:8080/product/all').then(response => {
+            this.setState({ products: response.data }, () => {
+                //console.log(this.state);
+            })
+        })
     }
 }
 export default Products;

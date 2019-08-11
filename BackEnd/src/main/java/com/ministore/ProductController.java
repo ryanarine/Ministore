@@ -26,7 +26,7 @@ public class ProductController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/Allproduct")
+	@RequestMapping("/product/all")
 	public List<Product> get() {
 		return ps.getAll();
 	}
@@ -34,5 +34,11 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.DELETE, value ="/product/{id}")
 	public void delete(@PathVariable long id) {
 		ps.delete(id);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/product/filter/{category}")
+	public List<Product> filterProducts(@PathVariable String category){
+		return ps.filter(category);
 	}
 }
