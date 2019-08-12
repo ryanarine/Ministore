@@ -12,16 +12,13 @@ class Product extends Component {
     }
     render() {
         return (
-            <div>
-                <ul>
-                    <li>{"Name: " + this.state.name}</li>
-                    <li>{"Category: " + this.state.category}</li>
-                    <li>{"Price: " + this.state.price}</li>
-                    <li>{"Weight: " + this.state.weight}</li>
+            <ul>
+                <li>{"Name: " + this.state.name}</li>
+                <li>{"Category: " + this.state.category}</li>
+                <li>{"Price: " + this.state.price}</li>
+                <li>{"Weight: " + this.state.weight}</li>
                     
-                </ul>
-                <br></br>
-            </div>  
+            </ul>
         )
     }
 }

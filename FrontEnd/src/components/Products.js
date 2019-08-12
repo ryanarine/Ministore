@@ -71,11 +71,10 @@ class Products extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <Categories />
                     <input type="submit" value="Submit" />
+                    <br></br>
                     <input type="text" placeholder="Search" onChange={this.handleChange} />
                 </form>
-                <ul>
-                    {productItem}
-                </ul>
+                {productItem}
             </div>
         )
     }

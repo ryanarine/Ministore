@@ -25,7 +25,7 @@ class Categories extends Component {
         })
 
         return (
-            <select name="category" onChange={this.handleChange}>
+            <select name="category">
                 <option value="">All Categories</option>
                 {categoryItem}
             </select>
