@@ -7,30 +7,56 @@ class Products extends Component {
     constructor() {
         super();
         this.state = {
-            products: []
+            products: [],
+            category: "",
+            search: ""
         }
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.filterCategory = this.filterCategory.bind(this);
+        this.filter = this.filter.bind(this);
+        this.getFilteredProducts = this.getFilteredProducts.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({search: event.target.value}, this.filter);
     }
 
     handleSubmit(event) {
         // value of category list
         let category = event.target.childNodes[0].value;
-        this.filterCategory(category);
+        this.setState({ category: category }, this.filter);
         event.preventDefault();
     }
 
-    filterCategory(category) {
-        if (category === "") {
-            this.componentDidMount();
+    filter() {
+        var url;
+        if (this.state.category === "") {
+            if (this.state.search === "") {
+                this.componentDidMount();
+                return;
+            }
+            else {
+                url = 'http://localhost:8080/product/search/' + this.state.search;
+                  
+            }
         }
         else {
-            axios.get('http://localhost:8080/product/filter/' + category).then(response => {
-                this.setState({ products: response.data }, () => {
-                    //console.log(this.state);
-                })
-            })
+            if (this.state.search === "") {
+                url = 'http://localhost:8080/product/category/' + this.state.category;
+                  
+            }
+            else {
+                url = 'http://localhost:8080/product/categorysearch/' + this.state.category
+                    + '/' + this.state.search;
+            }
         }
+        this.getFilteredProducts(url);
+    }
+
+    getFilteredProducts(url) {
+        axios.get(url).then(response => {
+                this.setState({ products: response.data })
+            })
     }
             
     render() {
@@ -41,10 +67,11 @@ class Products extends Component {
         })
         return (
             <div>
-                <h1>Products</h1>
+                <h1>Ministore</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Categories />
                     <input type="submit" value="Submit" />
+                    <input type="text" placeholder="Search" onChange={this.handleChange} />
                 </form>
                 <ul>
                     {productItem}

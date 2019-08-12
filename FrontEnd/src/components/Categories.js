@@ -20,7 +20,7 @@ class Categories extends Component {
     render() {
         var categoryItem = this.state.categories.map((item, i) => {
             return (
-                <option key={item.name} name={item.name}>{item.name}</option>
+                <option key={item.name} value={item.name}>{item.name}</option>
             )
         })
 

@@ -34,9 +34,21 @@ public class ProductService {
 		return res;
 	}
 	
-	public List<Product> filter(String category) {
+	public List<Product> filterCategory(String category) {
 		List<Product> res = new ArrayList<>();
-		pr.findByCategory(category).forEach(res :: add);
+		pr.filterCategory(category).forEach(res :: add);
+		return res;
+	}
+	
+	public List<Product> filterSearch(String search) {
+		List<Product> res = new ArrayList<>();
+		pr.filterSearch(search).forEach(res :: add);
+		return res;
+	}
+	
+	public List<Product> filterCategoryAndSearch(String category, String search) {
+		List<Product> res = new ArrayList<>();
+		pr.filterCategoryAndSearch(category, search).forEach(res :: add);
 		return res;
 	}
 }

@@ -37,8 +37,20 @@ public class ProductController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping("/product/filter/{category}")
-	public List<Product> filterProducts(@PathVariable String category){
-		return ps.filter(category);
+	@RequestMapping("/product/category/{category}")
+	public List<Product> filterProductsByCategory(@PathVariable String category){
+		return ps.filterCategory(category);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/product/search/{search}")
+	public List<Product> filterProductsbySearch(@PathVariable String search){
+		return ps.filterSearch(search);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping("/product/categorysearch/{category}/{search}")
+	public List<Product> filterProductsbySearch(@PathVariable String category, @PathVariable String search){
+		return ps.filterCategoryAndSearch(category, search);
 	}
 }
