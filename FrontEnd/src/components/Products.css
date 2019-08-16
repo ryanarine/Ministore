@@ -1,0 +1,36 @@
+.grid {
+    display: grid;
+    grid-template-columns: calc(33% - 20px) calc(33% - 20px) calc(33% - 20px);
+    padding-left: 20px;
+    margin-top: 20px;
+    grid-gap: 20px;
+}
+
+    .grid ul {
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        list-style-type: none;
+        background-color: #00c308;
+        background-color: rgba(0,195,8, 194);
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    .grid ul li {
+        font-size: 1.5vw;
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: 300;
+        text-align: center;
+    }
+
+@media only screen and (min-width: 600px) {
+    .grid {
+        grid-template-columns: calc(25% - 20px) calc(25% - 20px) calc(25% - 20px) calc(25% - 20px);
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .grid {
+        grid-template-columns: calc(20% - 20px) calc(20% - 20px) calc(20% - 20px) calc(20% - 20px) calc(20% - 20px);
+    }
+}

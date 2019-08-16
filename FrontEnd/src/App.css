@@ -2,17 +2,9 @@ div{
    text-align: center;
 }
 
-ul{
-    list-style-type: none;
-}
-
-button, input, select{
+select{
     margin: 5px;
-    font-size: calc(7px + 1vw);
-}
-
-li{
-    font-size: calc(5px + 1vw);
+    font-size: 15px;
 }
 
 input[type=submit] {
@@ -21,4 +13,8 @@ input[type=submit] {
     border-radius: 6px;
     color: white;
     cursor: pointer;
+}
+
+#title {
+    float: left;
 }

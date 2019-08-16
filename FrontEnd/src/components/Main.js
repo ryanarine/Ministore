@@ -1,15 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import Products from './Products';
+import Store from './Store';
+import Login from './Login';
 
 const Main = () => (
-    <div>
-        <main>
-            <Switch>
-                <Route exact path="/" component={Products}/>
-            </Switch>
-        </main>
-    </div>    
+        <Switch>
+            <Route exact path="/" component={Store} />
+            <Route exact path="/login/" component={Login} />
+        </Switch>
 )
 
 export default Main;
