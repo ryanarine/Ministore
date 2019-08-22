@@ -13,3 +13,7 @@ This project is a pseudo E-Commerce website I am making with Java Spring and MyS
 -A fake money system <br>
 -pagination for product display <br>
 -product display shows a preview image if available <br>
+
+### Product Filtration Demo <br>
+
+![Product Filtration GIF is Loading...](filter.gif)
