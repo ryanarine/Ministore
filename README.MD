@@ -15,5 +15,5 @@ This project is a pseudo E-Commerce website I am making with Java Spring and MyS
 -product display shows a preview image if available <br>
 
 ### Product Filtration Demo <br>
-
-![Product Filtration GIF is Loading...](filter.gif)
+This is a demo GIF that shows how the site currently looks like and highlights the filtration functionality. First it shows filtering by category, then by using the search bar, then both.
+![Loading...](Filter.gif)
