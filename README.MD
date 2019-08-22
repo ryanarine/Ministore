@@ -15,5 +15,9 @@ This project is a pseudo E-Commerce website I am making with Java Spring and MyS
 -product display shows a preview image if available <br>
 
 ### Product Filtration Demo <br>
-This is a demo GIF that shows how the site currently looks like and highlights the filtration functionality. First it shows filtering by category, then by using the search bar, then both.
+This is a demo GIF that shows how the site currently looks like and highlights the filtration functionality. First it shows filtering by category, then by using the search bar, then both. <br>
 ![Loading...](Filter.gif)
+
+### Responsiveness Demo <br>
+This is a demo GIF that highlights the responsiveness of the site. The main thing to observe is how the product grid adapts to the width of the device. This is not exactly how it would be seen on on smaller devices because the fullscreen of my device was not being used but it gives an idea. <br>
+![Loading...](Responsive.gif)
