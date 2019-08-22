@@ -1,0 +1,5 @@
+#logoutButton {
+    background-color: red;
+    border: 1px solid orangered;
+    background-image: linear-gradient(orangered, red);
+}

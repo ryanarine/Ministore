@@ -3,19 +3,11 @@ import axios from 'axios';
 import Products from './Products';
 import Categories from './Categories';
 import Account from './Account';
-
-function toByteArray(str) {
-    var res = [];
-    for (let i = 0; i < str.length; i++) {
-        res.push(str.charCodeAt(i));
-    }
-    return res;
-}
+import {baseUrl} from './Constants';
 
 function getCookie(cname) {
     var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
+    var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) === ' ') {
@@ -36,29 +28,19 @@ class Store extends Component {
             category: "",
             search: "",
             name: "",
-            modal: false,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.filter = this.filter.bind(this);
         this.getFilteredProducts = this.getFilteredProducts.bind(this);
-        this.handleAccount = this.handleAccount.bind(this);
-        this.setModalFalse = this.setModalFalse.bind(this);
-        this.setModalTrue = this.setModalTrue.bind(this);
     }
 
-    setModalFalse() {
-        this.setState({modal: false})
-    }
-
-    setModalTrue() {
-        this.setState({ modal: true })
-    }
-
+    // search field 
     handleChange(event) {
         this.setState({search: event.target.value}, this.filter);
     }
 
+    // category field
     handleSubmit(event) {
         // value of category list
         let category = event.target.childNodes[0].value;
@@ -66,44 +48,37 @@ class Store extends Component {
         event.preventDefault();
     }
 
-    handleAccount(event) {
-        let username = event.target.childNodes[0].value;
-        let password = toByteArray(event.target.childNodes[3].value);
-        let name = event.target.childNodes[6].value;
-        axios.post('http://localhost:8080/user/add', { username: username, password: password, name: name }, { headers: { 'Content-Type': "application/json" } })
-            .then(res => {
-                if (res.data === 401) {
-                    alert("Username has already been taken");
-                }
-            });
-        event.preventDefault();
-    }
-
+    // filter products by search and category fields
     filter() {
         var url;
         if (this.state.category === "") {
+            // no filter
             if (this.state.search === "") {
                 this.componentDidMount();
                 return;
             }
+            // filter by search only
             else {
-                url = 'http://localhost:8080/product/search/' + this.state.search;
+                url = baseUrl + 'product/search/' + this.state.search;
                   
             }
         }
         else {
+            // filter by category only
             if (this.state.search === "") {
-                url = 'http://localhost:8080/product/category/' + this.state.category;
+                url = baseUrl + 'product/category/' + this.state.category;
                   
             }
+            // filter by category and search
             else {
-                url = 'http://localhost:8080/product/categorysearch/' + this.state.category
+                url = baseUrl + 'product/categorysearch/' + this.state.category
                     + '/' + this.state.search;
             }
         }
         this.getFilteredProducts(url);
     }
 
+    //  get filtered products and set state
     getFilteredProducts(url) {
         axios.get(url).then(response => {
                 this.setState({ products: response.data })
@@ -115,7 +90,7 @@ class Store extends Component {
             <div>
                 <div className="navbar">
                     <h2 id="title">Ministore</h2>
-                    <Account name={this.state.name} setModalTrue={this.setModalTrue} />
+                    <Account name={this.state.name}/>
                 </div>
                 
                 <form onSubmit={this.handleSubmit}>
@@ -124,20 +99,25 @@ class Store extends Component {
                     <br></br>
                     <input type="text" placeholder="Search" onChange={this.handleChange} />
                 </form>
+
                 <Products products={this.state.products} />
             </div>
         )
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/product/all').then(response => {
+        axios.get(baseUrl + 'product/all').then(response => {
             this.setState({ products: response.data })
         })
-        let uname = getCookie('username');
-        axios.get("http://localhost:8080/user/name/" + uname).then(res => {
-            this.setState({ name: res.data })
-            
-        });
+        if (document.cookie) {
+            let uname = getCookie('username');
+            if (uname !== "") {
+                axios.get(baseUrl + "user/name/" + uname).then(res => {
+                    this.setState({ name: res.data })
+
+                });
+            }
+        }
     }
 }
 export default Store

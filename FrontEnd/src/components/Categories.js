@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { baseUrl } from './Constants';
 
 class Categories extends Component {
     constructor() {
@@ -10,9 +11,8 @@ class Categories extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/category/all').then(response => {
+        axios.get(baseUrl + 'category/all').then(response => {
             this.setState({ categories: response.data }, () => {
-                //console.log(this.state);
             })
         })
     }

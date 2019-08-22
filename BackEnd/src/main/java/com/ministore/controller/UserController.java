@@ -3,6 +3,7 @@ package com.ministore.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,19 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/user/add")
-	public void add(@RequestBody User u, HttpServletResponse res) throws IOException {
-		if (us.hasUser(u.getUsername())) {
-			PrintWriter out = res.getWriter();
+	public void add(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		String name = req.getParameter("name");
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		PrintWriter out = res.getWriter();
+		if (us.hasUser(username)) {
 			out.println(401);
 		}
-		us.add(u.getUsername(), u.getPassword(), u.getName());
+		else {
+			us.add(username, password.getBytes(), name);
+			out.println((new String(us.updateHash(username))));
+		}
+		out.close();
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
