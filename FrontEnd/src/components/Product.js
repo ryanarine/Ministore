@@ -12,7 +12,7 @@ class Product extends Component {
     }
     render() {
         return (
-            <ul>
+            <ul onClick={this.props.click}>
                 <li>{"Name: " + this.state.name}</li>
                 <li>{"Category: " + this.state.category}</li>
                 <li>{"Price: " + this.state.price}</li>

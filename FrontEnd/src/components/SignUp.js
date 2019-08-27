@@ -11,9 +11,9 @@ class SignUp extends Component {
     }
 
     handleSignUp(event) {
-        let name = document.getElementById('namefield').value;
-        let username = document.getElementById('unamefield').value;
-        let password = document.getElementById('pswfield').value;
+        let name = event.target.elements.namefield.value;
+        let username = event.target.elements.unamefield.value;
+        let password = event.target.elements.pswfield.value;
         const params = new URLSearchParams();
         params.append('name', name);
         params.append('username', username);
@@ -37,18 +37,18 @@ class SignUp extends Component {
 
     render() {
         return (
-            <form className="accountBox">
+            <form className="accountBox" onSubmit={this.handleSignUp}>
                 <label> Display Name
-				<input type="text" id="namefield" required />
+				<input type="text" name="namefield" id="loginInput" required />
                 </label>
                 <label> Username
-				<input type="text" id="unamefield"required />
+				<input type="text" name="unamefield" id="loginInput" required />
                 </label>
                 <label> Password
-				<input type="password" id="pswfield" required />
+				<input type="password" name="pswfield" id="loginInput" required />
                 </label>
-                <input type="submit" value="Sign Up" className="accountButton" onClick={this.handleSignUp} />
-                <Link to="/"><input className="cancelButton" type="submit" value="Cancel" /></Link>
+                <input type="submit" value="Sign Up" id="posButton" />
+                <Link to="/"><input id="negButton" type="submit" value="Cancel" /></Link>
             </form>
         );
     }

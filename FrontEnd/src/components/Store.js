@@ -3,7 +3,8 @@ import axios from 'axios';
 import Products from './Products';
 import Categories from './Categories';
 import Account from './Account';
-import {baseUrl} from './Constants';
+import { baseUrl } from './Constants';
+import Logo from './logo.PNG';
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -89,17 +90,21 @@ class Store extends Component {
         return (
             <div>
                 <div className="navbar">
-                    <h2 id="title">Ministore</h2>
-                    <Account name={this.state.name}/>
+                    <span className="left">
+                        <img src={Logo} alt="logo" id="logo"/>
+                        <h2>Ministore</h2>
+                    </span>
+                    <span className="right">
+                        <Account name={this.state.name} />
+                    </span>
                 </div>
                 
                 <form onSubmit={this.handleSubmit}>
                     <Categories />
-                    <input type="submit" value="Submit" />
+                    <input id="posButton" type="submit" value="Submit" />
                     <br></br>
-                    <input type="text" placeholder="Search" onChange={this.handleChange} />
+                    <input type="text" placeholder="Search..." onChange={this.handleChange} />
                 </form>
-
                 <Products products={this.state.products} />
             </div>
         )

@@ -1,64 +1,117 @@
-div{
-   text-align: center;
+#logo {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 10px;
+    height: calc(100% - 2px);
 }
 
-select{
-    margin: 5px;
+#neutralBg {
+    background-color: #252925;
+    background-image: linear-gradient(#252925, black);
 }
 
 input[type=submit] {
-    background-color: forestgreen;
     border-radius: 6px;
     padding-bottom: 0;
     padding-top: 0;
     cursor: pointer;
+    color: white;
 }
 
-#title {
-    float: left;
+input::placeholder{
+    color: #333;
 }
 
-select, option, input {
-    background-color: #252925;
+select, option, input, button{
     color: white;
     font-size: calc(1vw + 10px);
     border-color: green;
     border: 1px solid green;
+    margin: 10px;
 }
+
+#negButton {
+    background-color: red;   
+    background-image: linear-gradient(#ff3300, #ff7700);
+}
+
+#posButton {
+    background-color: green;
+    background-image: linear-gradient(forestgreen, green);
+}
+
+/* Forms */
+form label {
+    color: white;
+}
+
+form select{
+    text-align: center;
+    background-color: rgb(232, 240, 254);
+    background-image: none;
+    color: black;
+}
+
+form select option{
+    color: black;
+}
+
+form input{
+    background-color: rgb(232, 240, 254);
+    color: black;
+}
+
+/* Navbar */
 
 .navbar {
     width: 100%;
     background-color: darkgreen;
-    height: auto;
+    height: 40px;
     overflow: auto;
     box-shadow: green 0px 0px 1px, green 0px 1px 0px, green 1px 0px 0px;
     padding: 0;
     margin: 0;
+    margin-bottom: 5px;
 }
 
-    .navbar h2 {
-        margin: 0;
-        margin-left: 20px;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: calc(1vw + 12px);
-    }
+.navbar h2 {
+    margin: 0;
+    margin-left: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 28px;
+    font-weight: 100;
+}
 
-    .navbar h3 {
-        margin: 0;
-        margin-top: 2px;
-        padding-right: 20px;
-        font-size: calc(1vw + 8px);
-    }
+.navbar h3 {
+    margin: 0;
+    margin-top: 2px;
+    padding-right: 6px;
+    font-size: 23px;
+    font-weight: 100;
+}
 
-    .navbar input {
-        margin: 6px;
-        font-size: calc(1vw + 5px);
-        background-color: #252925;
-    }
+.right *{
+    float: right;
+    color: white;
+    font-weight: 100;
+}
 
-    .navbar * {
-        color: white;
-        float: right;
-        font-weight: 100;
-    }
+.left *{
+    float: left;
+    color: white;
+    font-weight: 100;
+    height: inherit;
+}
+
+.navbar input, .navbar button {
+    margin: 6px;
+    margin-top: 7px;
+    font-size: 20px;
+}
+
+.navbar button {
+    border: 1px solid forestgreen;
+    border-radius: 6px;
+    cursor: pointer;
+}
 

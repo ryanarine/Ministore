@@ -26,15 +26,15 @@ class Account extends Component {
     render() {
         if (this.props.name !== "") {
             return (<div>
-                <input id="logoutButton" type="submit" value="Logout" onClick={this.removeCookies} />
+                <input id="negButton" type="submit" value="Logout" onClick={this.removeCookies} />
                 <h3> Hello {this.props.name} </h3>
             </div>);
         }
         return (
-            <span>
-                <input type="submit" value="Sign Up" onClick={this.goToSignUp} />
-                <input type="submit" value="Sign In" onClick={this.goToLogin} />
-            </span>
+            <div>
+                <input id="neutralBg" type="submit" value="Sign Up" onClick={this.goToSignUp} />
+                <input id="neutralBg" type="submit" value="Sign In" onClick={this.goToLogin} />
+            </div>
         );
     }
 }

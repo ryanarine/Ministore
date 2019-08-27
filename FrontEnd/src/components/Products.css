@@ -16,6 +16,10 @@
         padding: 0;
     }
 
+    .gridhover ul:hover {
+        background-color: red;
+    }
+
     .grid ul li {
         font-size: 1.5vw;
         font-family: 'Segoe UI', sans-serif;

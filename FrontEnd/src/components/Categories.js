@@ -23,7 +23,13 @@ class Categories extends Component {
                 <option key={item.name} value={item.name}>{item.name}</option>
             )
         })
-
+        if (this.props.noDefault){
+            return (
+                <select name="category">
+                    {categoryItem}
+                </select>
+            )
+        }
         return (
             <select name="category">
                 <option value="">All Categories</option>

@@ -63,4 +63,9 @@ public class Product {
 	public long getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return("ID: " + this.id + " Name: " + this.name + " Category: " + this.category + " Weight: " + this.weight + " Price:" + this.price);
+	}
 }

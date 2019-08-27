@@ -2,6 +2,9 @@ package com.ministore.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +21,14 @@ public class ProductController {
 	@Autowired
 	private ProductService ps;
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/product/add")
-	public void add(@RequestBody Product p) {
+	public void add(HttpServletRequest req, HttpServletResponse res) {
+		String name = req.getParameter("name");
+		String category = req.getParameter("category");
+		String price = req.getParameter("price");
+		String weight = req.getParameter("weight");
+		Product p = new Product(name, weight, category, price);
 		ps.add(p);
 	}
 	
@@ -34,9 +43,10 @@ public class ProductController {
 		return ps.getAll();
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value ="/product/{id}")
-	public void delete(@PathVariable long id) {
-		ps.delete(id);
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(method = RequestMethod.DELETE, value ="/product/delete")
+	public void delete(HttpServletRequest req, HttpServletResponse res) {
+		ps.delete(Long.parseLong(req.getParameter("id")));
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
