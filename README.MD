@@ -23,6 +23,15 @@ This is a demo GIF that shows how the site currently looks like and highlights t
 This is a demo GIF that highlights the responsiveness of the site. The main thing to observe is how the product grid adapts to the width of the device. This is not exactly how it would be seen on on smaller devices because the fullscreen of my device was not being used but it gives an idea. <br>
 ![Loading...](Responsive.gif)
 
+### Login/Sign Up Demo <br>
+This is a demo GIF that shows the login and sign up functionality of the site. It deals with two accounts ryan97(mine) and Customer(password is Customer), the former is already an account while the latter needs to sign up. The demo shows the following:
+1) Me logging in then logging out, then me entering the wrong password
+2) Customer trying to log in 
+3) Customer trying to sign up with my username then successfully signing up
+6) Customer refreshing the page
+7) Customer logging out then logging back in <br>
+![Loading...](Account.gif)
+
 ### Product Adding Demo <br>
 This is a demo GIF that shows what the process of adding products to the database looks like. First it shows that the cancel button on the form works as well as form validation. Finally after the form has been validated, you can see that a cheese product has been added to the inventory. <br>
 ![Loading...](ProductAdd.gif)
