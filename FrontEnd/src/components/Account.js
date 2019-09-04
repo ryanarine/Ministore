@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Account.css';
+import {homeUrl} from './Constants';
 
 class Account extends Component {
     constructor() {
@@ -10,17 +10,17 @@ class Account extends Component {
     }
 
     goToSignUp() {
-        window.location += "signup";
+        window.location = homeUrl + "signup";
     }
 
     goToLogin() {
-        window.location += "login";
+        window.location = homeUrl + "login";
     }
 
     removeCookies() {
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
         document.cookie = "hash=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        window.location = window.location + ""; // force refresh
+        window.location = homeUrl; // force refresh
     }
 
     render() {

@@ -2,8 +2,10 @@ package com.ministore.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ministore.model.Category;
@@ -19,12 +21,16 @@ public class CategoryService {
 		cr.save(c);
 	}
 	
-	public Category getByName(String name) {
-		return cr.findById(name).get();
+	public boolean has(String name) {
+		return  !cr.findById(name).isEmpty();
 	}
 	
-	public void delete(String name) {
-		cr.deleteById(name);
+	public boolean delete(String name) {
+		if (cr.countProducts(name) == 0) {
+			cr.deleteById(name);
+			return true;
+		}
+		return false;
 	}
 	
 	public List<Category> getAll() {

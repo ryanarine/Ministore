@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import './Account.css';
 import { baseUrl } from './Constants';
 
 class Login extends Component {
@@ -37,10 +37,10 @@ class Login extends Component {
         return (
             <form className="accountBox" onSubmit={this.handleLogin}>
                 <label> Username
-				<input type="text" name="unamefield" id="loginInput" required />
+				<input type="text" name="unamefield" required />
                 </label>
                 <label> Password
-				<input type="password" name="pswfield" id="loginInput" required />
+				<input type="password" name="pswfield" required />
                 </label>
                 <input id="posButton" type="submit" value="Login"/>
                 <Link to="/"><input id="negButton" type="submit" value="Cancel" /></Link>

@@ -21,6 +21,17 @@ function getCookie(cname) {
     return "";
 }
 
+const formStyle = {
+    width: "30vw",
+    minWidth: "300px",
+    display: "grid",
+    gridTemplateColumns: "70% 30%"
+}
+
+const searchBarStyle = {
+    gridColumn: "1 / 3" 
+}
+
 class Store extends Component {
     constructor() {
         super();
@@ -44,8 +55,10 @@ class Store extends Component {
     // category field
     handleSubmit(event) {
         // value of category list
-        let category = event.target.childNodes[0].value;
-        this.setState({ category: category }, this.filter);
+        let category = event.target.elements.category.value;
+        if (category !== this.state.category){
+            this.setState({ category: category }, this.filter);
+        }
         event.preventDefault();
     }
 
@@ -99,11 +112,10 @@ class Store extends Component {
                     </span>
                 </div>
                 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} style={formStyle}>
                     <Categories />
                     <input id="posButton" type="submit" value="Submit" />
-                    <br></br>
-                    <input type="text" placeholder="Search..." onChange={this.handleChange} />
+                    <input type="text" placeholder="Search..." onChange={this.handleChange} style={searchBarStyle} />
                 </form>
                 <Products products={this.state.products} />
             </div>

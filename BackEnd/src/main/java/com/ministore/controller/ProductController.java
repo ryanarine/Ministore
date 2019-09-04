@@ -1,5 +1,7 @@
 package com.ministore.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +46,15 @@ public class ProductController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.DELETE, value ="/product/delete")
-	public void delete(HttpServletRequest req, HttpServletResponse res) {
-		ps.delete(Long.parseLong(req.getParameter("id")));
+	public void delete(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		long id = Long.parseLong(req.getParameter("id"));
+		if (ps.getById(id) != null) {
+			ps.delete(id);
+		}
+		else {
+			PrintWriter out = res.getWriter();
+			out.print(500);
+		}
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")

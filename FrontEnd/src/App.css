@@ -10,12 +10,8 @@
     background-image: linear-gradient(#252925, black);
 }
 
-input[type=submit] {
-    border-radius: 6px;
-    padding-bottom: 0;
-    padding-top: 0;
+input[type=submit]{
     cursor: pointer;
-    color: white;
 }
 
 input::placeholder{
@@ -25,24 +21,45 @@ input::placeholder{
 select, option, input, button{
     color: white;
     font-size: calc(1vw + 10px);
-    border-color: green;
-    border: 1px solid green;
-    margin: 10px;
+    margin: 2px 10px;
+    border: 2px solid black;
 }
 
 #negButton {
+    color: white;
     background-color: red;   
     background-image: linear-gradient(#ff3300, #ff7700);
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 #posButton {
+    color: white;
     background-color: green;
     background-image: linear-gradient(forestgreen, green);
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 /* Forms */
+form {
+    border: 5px solid black;
+    background-color: green;
+    background-image: linear-gradient(limegreen, green);
+    margin: auto;
+    border-radius: 10px;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+    font-size: calc(8px + 1vw);
+}
+
+form > select, form > input[type=text] {
+    margin: 6px auto;
+    width: calc(100% - 12px);
+}
+
 form label {
     color: white;
+    width: 100%;
 }
 
 form select{
@@ -50,6 +67,7 @@ form select{
     background-color: rgb(232, 240, 254);
     background-image: none;
     color: black;
+    border-radius: 5px;
 }
 
 form select option{
@@ -59,6 +77,8 @@ form select option{
 form input{
     background-color: rgb(232, 240, 254);
     color: black;
+    border-radius: 5px;
+    text-align: center;
 }
 
 /* Navbar */
@@ -66,27 +86,26 @@ form input{
 .navbar {
     width: 100%;
     background-color: darkgreen;
-    height: 40px;
+    height: calc(22px + 1.2vw);
     overflow: auto;
     box-shadow: green 0px 0px 1px, green 0px 1px 0px, green 1px 0px 0px;
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
+    position: relative;
 }
 
 .navbar h2 {
-    margin: 0;
-    margin-left: 10px;
+    margin: 0 0 0 10px;
     font-family: 'Segoe UI', sans-serif;
-    font-size: 28px;
+    font-size: calc(12px + 1.2vw);
     font-weight: 100;
 }
 
 .navbar h3 {
-    margin: 0;
-    margin-top: 2px;
+    margin: calc(5% - 0.8vw) 0 0 0;
     padding-right: 6px;
-    font-size: 23px;
+    font-size: calc(8px + 1.2vw);
     font-weight: 100;
 }
 
@@ -104,9 +123,8 @@ form input{
 }
 
 .navbar input, .navbar button {
-    margin: 6px;
-    margin-top: 7px;
-    font-size: 20px;
+    font-size: calc(6px + 1.2vw);
+    margin-right: 10px;
 }
 
 .navbar button {

@@ -1,7 +1,7 @@
 .grid {
     display: grid;
-    grid-template-columns: calc(33% - 20px) calc(33% - 20px) calc(33% - 20px);
-    padding-left: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 10px;
     margin-top: 20px;
     grid-gap: 20px;
 }
@@ -29,12 +29,12 @@
 
 @media only screen and (min-width: 600px) {
     .grid {
-        grid-template-columns: calc(25% - 20px) calc(25% - 20px) calc(25% - 20px) calc(25% - 20px);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .grid {
-        grid-template-columns: calc(20% - 20px) calc(20% - 20px) calc(20% - 20px) calc(20% - 20px) calc(20% - 20px);
+        grid-template-columns: repeat(5, 1fr);
     }
 }
