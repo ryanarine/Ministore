@@ -1,5 +1,7 @@
 package com.ministore.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,19 @@ public class UserService {
 		return ur.existsById(username);
 	}
 	
+	public int getPrivledge(String username) {
+		return ur.Privledge(username);
+	}
+	
+	public Object[] getCredentials(String username, byte[] hash) {
+		List<Object[]> result = ur.getCredentials(username, hash);
+		return (result.isEmpty()) ? null : result.get(0); 
+	}
+	
+	public List<Object[]> getNonMasterUsers(){
+		return ur.getNonMasterUsers(User.MASTER);
+	}
+	
 	public void add(String username, byte[] password, String name) {
 		byte[] salt = Passwords.getNextSalt();
 		char[] psw = new char[password.length];
@@ -26,6 +41,10 @@ public class UserService {
 		ur.save(u);
 	}
 	
+	public void changePrivledge(String username, int privledge) {
+		ur.changePrivledge(username, privledge);
+	}
+	
 	public boolean isValidUser(String username, String password) {
 		if (!hasUser(username)) {
 			return false;
@@ -34,15 +53,8 @@ public class UserService {
 	}
 	
 	public byte[] updateHash(String username) {
-		byte[] hash = Passwords.getNextUnsignedSalt();
+		byte[] hash = Passwords.getNextHash();
 		ur.setHash(username, hash);
 		return hash;
-	}
-	
-	public String getName(String username) {
-		if (!ur.existsById(username)) {
-			return "";
-		}
-		return ur.getName(username);
 	}
 }

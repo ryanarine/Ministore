@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,6 +33,21 @@ public class LoginController{
 		}
 		else {
 			out.println((new String(us.updateHash(username))));
+		}
+		out.close();
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(method = RequestMethod.POST, value ="/stafflogin")
+	public void stafflogin(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		PrintWriter out = res.getWriter();
+		if (!us.isValidUser(username, password)) {
+			out.println(401);
+		}
+		else {
+			out.println(us.getPrivledge(username));
 		}
 		out.close();
 	}

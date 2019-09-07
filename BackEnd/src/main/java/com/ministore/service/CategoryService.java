@@ -2,10 +2,8 @@ package com.ministore.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ministore.model.Category;
@@ -26,6 +24,7 @@ public class CategoryService {
 	}
 	
 	public boolean delete(String name) {
+		System.out.println(cr.countProducts(name));
 		if (cr.countProducts(name) == 0) {
 			cr.deleteById(name);
 			return true;

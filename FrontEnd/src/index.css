@@ -6,3 +6,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+  --bg-color: #252925;
+  --text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black;
+  --product-backup-color: #00c308;
+  --product-color: rgba(0, 195, 8, 194);
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+div {
+  text-align: center;
+}
+
+select {
+  margin: 5px;
+}

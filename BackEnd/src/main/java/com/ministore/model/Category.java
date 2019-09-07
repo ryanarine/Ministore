@@ -7,15 +7,8 @@ import javax.persistence.Id;
 public class Category {
 	@Id
 	private String name;
+	private long products;
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public Category() {
 		super();
 		this.name = "Default";
@@ -25,4 +18,22 @@ public class Category {
 		super();
 		this.name = name;
 	}
+	
+	public long getProducts() {
+		return products;
+	}
+
+	public void setProducts(long products) {
+		this.products = products;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 }

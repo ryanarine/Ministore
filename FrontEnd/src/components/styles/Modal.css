@@ -1,0 +1,14 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-container {
+  margin-top: 10%;
+  width: 50%;
+  max-width: 500px;
+}

@@ -10,6 +10,9 @@ import com.ministore.model.Product;
 public interface ProductRepo extends CrudRepository<Product, Long>{
 	public Product findOneById(long id);
 	
+	@Query("select p.category from Product p where p.id = ?1")
+	public String getCategoryById(long id);
+	
 	@Query("select p from Product p order by name")
 	public List<Product> sortAll();
 	

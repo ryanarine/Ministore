@@ -30,7 +30,7 @@ public class ProductController {
 		String price = req.getParameter("price");
 		String weight = req.getParameter("weight");
 		Product p = new Product(name, weight, category, price);
-		ps.add(p);
+		ps.add(p, category);
 	}
 	
 	@RequestMapping("/product/{id}")

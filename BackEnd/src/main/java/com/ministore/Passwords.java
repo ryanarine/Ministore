@@ -40,16 +40,19 @@ public class Passwords {
 		return salt;
 	}
 	
-	public static byte[] getNextUnsignedSalt() {
-		byte[] salt = new byte[16];
-		RANDOM.nextBytes(salt);
-		for (int i = 0; i < salt.length; i++) {
-			salt[i] = (byte) ((salt[i] + Byte.MAX_VALUE) % Byte.MAX_VALUE);
-			salt[i] = (byte) ((salt[i] <= 32) ? salt[i] + 33 : salt[i]);
-			//semicolons not good for cookies
-			salt[i] = (byte) ((salt[i] == 59) ? salt[i] + 1 : salt[i]);
+	/**
+	 * Returns an alphanumeric hash to be generated every login
+	 *
+	 * @return a 16 bytes random alphanumeric hash
+	 */
+	public static byte[] getNextHash() {
+		byte[] hash = new byte[16];
+		for (int i = 0; i < hash.length; i++) {
+			hash[i] = (byte) RANDOM.nextInt(123);
+			hash[i] = (byte) ((hash[i] < 48) ? hash[i] + 48 : hash[i]);
+			hash[i] = (byte) ((hash[i] > 57 && hash[i] < 65) ? hash[i] + 7 : (hash[i] > 90 && hash[i] < 97) ? hash[i] + 6 : hash[i]);
 		}
-		return salt;
+		return hash;
 	}
 
 	/**

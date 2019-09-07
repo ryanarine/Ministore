@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ministore.model.Product;
+import com.ministore.repo.CategoryRepo;
 import com.ministore.repo.ProductRepo;
 
 @Service
@@ -14,9 +15,12 @@ public class ProductService {
 	
 	@Autowired
 	private ProductRepo pr;
+	@Autowired
+	private CategoryRepo cr;
 	
-	public void add(Product p) {
+	public void add(Product p, String category) {
 		pr.save(p);
+		cr.increment(category);
 	}
 	
 	public Product getById(long id) {
@@ -24,7 +28,9 @@ public class ProductService {
 	}
 	
 	public void delete(long id) {
+		String category = pr.getCategoryById(id);
 		pr.deleteById(id);
+		cr.decrement(category);
 	}
 	
 	public void update(Product p) {

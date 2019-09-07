@@ -1,0 +1,38 @@
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 10px auto 0 auto;
+}
+
+td,
+th {
+  border: 3px solid black;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  /*background-color: var(--bg-color);*/
+  background-color: #eee;
+}
+
+tr:nth-child(odd) {
+  /*background-color: var(--product-backup-color);
+    background-color: var(--product-color);*/
+  background-color: lightgreen;
+}
+
+button.Customer,
+button.Staff {
+  border-radius: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  max-width: 80%;
+  min-width: 40%;
+}
+button.Customer {
+  background-color: #4d4;
+}
+
+button.Staff {
+  background-color: #d44;
+}

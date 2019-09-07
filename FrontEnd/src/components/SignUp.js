@@ -1,57 +1,44 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './Account.css';
-import { baseUrl } from './Constants';
+import React from "react";
+import axios from "axios";
+import { baseUrl } from "./Constants";
+import AccountBox from "./AccountBox";
 
-class SignUp extends Component {
-    constructor() {
-        super();
-        this.handleSignUp = this.handleSignUp.bind(this);
-    }
-
-    handleSignUp(event) {
-        let name = event.target.elements.namefield.value;
-        let username = event.target.elements.unamefield.value;
-        let password = event.target.elements.pswfield.value;
-        const params = new URLSearchParams();
-        params.append('name', name);
-        params.append('username', username);
-        params.append('password', password);
-        axios({
-            method: 'post',
-            url: baseUrl + 'user/add',
-            data: params,
-        }).then(res => {
-            if (res.data === 401) {
-                alert("Username has already been taken");   
-            }
-            else {
-                document.cookie = "username=" + username;
-                document.cookie = "hash=" + res.data;
-                window.location = "/";
-            }
-        });
-        event.preventDefault();
-    }
-
-    render() {
-        return (
-            <form className="accountBox" onSubmit={this.handleSignUp}>
-                <label> Display Name
-				<input type="text" name="namefield" required />
-                </label>
-                <label> Username
-				<input type="text" name="unamefield" required />
-                </label>
-                <label> Password
-				<input type="password" name="pswfield" required />
-                </label>
-                <input type="submit" value="Sign Up" id="posButton" />
-                <Link to="/"><input id="negButton" type="submit" value="Cancel" /></Link>
-            </form>
-        );
-    }
+function SignUp() {
+  let labels = ["Display Name", "Username", "Password"];
+  let types = ["text", "text", "password"];
+  let names = ["namefield", "unamefield", "pswfield"];
+  return (
+    <AccountBox
+      submit={handleSignUp}
+      labels={labels}
+      types={types}
+      names={names}
+    />
+  );
 }
 
-export default SignUp
+function handleSignUp(event) {
+  let name = event.target.elements.namefield.value;
+  let username = event.target.elements.unamefield.value;
+  let password = event.target.elements.pswfield.value;
+  const params = new URLSearchParams();
+  params.append("name", name);
+  params.append("username", username);
+  params.append("password", password);
+  axios({
+    method: "post",
+    url: baseUrl + "user/add",
+    data: params
+  }).then(res => {
+    if (res.data === 401) {
+      alert("Username has already been taken");
+    } else {
+      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("hash", res.data);
+      window.location = "/";
+    }
+  });
+  event.preventDefault();
+}
+
+export default SignUp;
