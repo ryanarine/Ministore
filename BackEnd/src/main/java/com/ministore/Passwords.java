@@ -13,9 +13,8 @@ import javax.crypto.spec.PBEKeySpec;
  * A utility class to hash passwords and check passwords vs hashed values. It
  * uses a combination of hashing and unique salt. The algorithm used is
  * PBKDF2WithHmacSHA256 which, although not the best for hashing password (vs.
- * bcrypt) is still considered robust and
- * <a href="https://security.stackexchange.com/a/6415/12614"> recommended by
- * NIST </a>. The hashed value has 256 bits.
+ * bcrypt) is still considered robust and recommended by NIST.
+ * The hashed value has 256 bits.
  */
 public class Passwords {
 
@@ -92,13 +91,6 @@ public class Passwords {
 	 *         otherwise
 	 */
 	public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
-		byte[] pwdHash = hash(password, salt);
-		if (pwdHash.length != expectedHash.length)
-			return false;
-		for (int i = 0; i < pwdHash.length; i++) {
-			if (pwdHash[i] != expectedHash[i])
-				return false;
-		}
-		return true;
+		return Arrays.equals(hash(password, salt), expectedHash);
 	}
 }

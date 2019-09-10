@@ -15,37 +15,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ministore.model.Category;
 import com.ministore.service.CategoryService;
+import com.ministore.service.UserService;
 
 @RestController
 public class CategoryController {
 	@Autowired
 	private CategoryService cs;
+	@Autowired
+	private UserService us;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/category/add")
 	public void add(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		String name = req.getParameter("name");
-		if (cs.has(name)) {
-			PrintWriter out = res.getWriter();
-			out.print(409);
-		}
+		if (us.isMaster(req)) {
+			String name = req.getParameter("name");
+			if (cs.has(name)) {
+				PrintWriter out = res.getWriter();
+				out.print(HttpServletResponse.SC_CONFLICT);
+			}
+			else {
+				Category c = new Category(name);
+				cs.add(c);
+			}
+		}	
 		else {
-			Category c = new Category(name);
-			cs.add(c);
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.DELETE, value ="/category/delete")
 	public void delete(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		String name = req.getParameter("name");
-		if (!cs.has(name)) {
+		if (us.isMaster(req)) {
+			String name = req.getParameter("name");
 			PrintWriter out = res.getWriter();
-			out.print(412);
+			if (!cs.has(name)) {
+				out.print(HttpServletResponse.SC_NOT_FOUND);
+			}
+			// Category still has products in it
+			else if (!cs.delete(name)) {
+				out.print(HttpServletResponse.SC_FORBIDDEN);
+			}
+			out.close();
 		}
-		else if (!cs.delete(name)) {
-			PrintWriter out = res.getWriter();
-			out.print(403);
+		else {
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 	}
 	

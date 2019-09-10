@@ -24,7 +24,6 @@ public class CategoryService {
 	}
 	
 	public boolean delete(String name) {
-		System.out.println(cr.countProducts(name));
 		if (cr.countProducts(name) == 0) {
 			cr.deleteById(name);
 			return true;

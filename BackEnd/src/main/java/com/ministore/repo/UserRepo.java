@@ -11,6 +11,12 @@ import org.springframework.data.repository.CrudRepository;
 import com.ministore.model.User;
 
 public interface UserRepo extends CrudRepository<User, String> {
+	@Query("select u.name from User u where username = ?1")
+	public String getName(String username);
+	
+	@Query("select u.hash from User u where username = ?1")
+	public byte[] getHash(String username);
+	
 	@Query("select u.salt from User u where username = ?1")
 	public byte[] getSalt(String username);
 	
@@ -23,7 +29,7 @@ public interface UserRepo extends CrudRepository<User, String> {
 	@Query("select u.username, u.name, u.privledge from User u where u.privledge != ?1")
 	public List<Object[]> getNonMasterUsers(int masterPrivledge);
 	
-	@Query("select u.name, u.privledge from User u where username = ?1 and hash = ?2")
+	@Query("select u.name, u.privledge from User u where u.username = ?1 and u.hash = ?2")
 	public List<Object[]> getCredentials(String username, byte[] hash);
 	
 	@Transactional

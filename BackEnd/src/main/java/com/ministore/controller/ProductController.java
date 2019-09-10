@@ -15,27 +15,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ministore.model.Product;
+import com.ministore.model.User;
 import com.ministore.service.ProductService;
+import com.ministore.service.UserService;
 
 @RestController
 public class ProductController {
 	@Autowired
 	private ProductService ps;
+	@Autowired
+	private UserService us;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/product/add")
-	public void add(HttpServletRequest req, HttpServletResponse res) {
-		String name = req.getParameter("name");
-		String category = req.getParameter("category");
-		String price = req.getParameter("price");
-		String weight = req.getParameter("weight");
-		Product p = new Product(name, weight, category, price);
-		ps.add(p, category);
-	}
-	
-	@RequestMapping("/product/{id}")
-	public Product get(@PathVariable long id) {
-		return ps.getById(id);
+	public void add(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		if (us.isStaff(req)) {
+			String name = req.getParameter("name");
+			String category = req.getParameter("category");
+			String price = req.getParameter("price");
+			String weight = req.getParameter("weight");
+			Product p = new Product(name, weight, category, price);
+			ps.add(p, category);
+		}
+		else {
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
@@ -47,13 +51,18 @@ public class ProductController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.DELETE, value ="/product/delete")
 	public void delete(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		long id = Long.parseLong(req.getParameter("id"));
-		if (ps.getById(id) != null) {
-			ps.delete(id);
+		if (us.isStaff(req)) {
+			long id = Long.parseLong(req.getParameter("id"));
+			if (ps.getById(id) != null) {
+				ps.delete(id);
+			}
+			else {
+				PrintWriter out = res.getWriter();
+				out.print(HttpServletResponse.SC_NOT_FOUND);
+			}
 		}
 		else {
-			PrintWriter out = res.getWriter();
-			out.print(500);
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 	}
 	

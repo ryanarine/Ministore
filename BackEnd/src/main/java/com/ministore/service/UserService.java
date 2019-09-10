@@ -1,6 +1,9 @@
 package com.ministore.service;
 
+import java.util.Arrays;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +16,37 @@ import com.ministore.repo.UserRepo;
 public class UserService {
 	@Autowired
 	private UserRepo ur;
-	
+		
 	public boolean hasUser(String username) {
 		return ur.existsById(username);
 	}
 	
-	public int getPrivledge(String username) {
-		return ur.Privledge(username);
+	public boolean validHash(String username, String hash) {
+		if (username == null || hash == null) {
+			return false;
+		}
+		byte [] actualHash = ur.getHash(username);
+		return (actualHash == null) ? false : Arrays.equals(actualHash, hash.getBytes());
 	}
 	
-	public Object[] getCredentials(String username, byte[] hash) {
-		List<Object[]> result = ur.getCredentials(username, hash);
-		return (result.isEmpty()) ? null : result.get(0); 
+	public boolean isStaff(HttpServletRequest req) {
+		return isUserAllowed(req.getParameter("username"), req.getParameter("hash"), User.STAFF);
+	}
+	
+	public boolean isMaster(HttpServletRequest req) {
+		return isUserAllowed(req.getParameter("username"), req.getParameter("hash"), User.MASTER);
+	}
+	
+	public boolean isUserAllowed(String username, String hash, int value) {
+		return validHash(username, hash) && ur.Privledge(username) <= value;
+	}
+	
+	public String getName(String username) {
+		return ur.getName(username);
+	}
+	
+	public int getPrivledge(String username) {
+		return ur.Privledge(username);
 	}
 	
 	public List<Object[]> getNonMasterUsers(){
