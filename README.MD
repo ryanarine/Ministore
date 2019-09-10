@@ -11,7 +11,6 @@ This project is a pseudo E-Commerce website I am making with Java Spring and MyS
 -User privileges. There are 3 privileges (Customer, Staff, Master). Customers are users that have signed up for an account. Staff members can add/delete products in the inventory database. The Master(me) can also add/delete categories and choose which accounts are permitted Staff privileges. <br>
 
 ### Features that have yet to be added: <br>
--Authentication through the backend <br>
 -A fake money system (Customers start with $0 but can add money to their wallet just by entering an amount) <br>
 -Pagination for product display <br>
 -Product display shows a preview image if available <br>
