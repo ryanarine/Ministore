@@ -30,7 +30,7 @@ function handleSignUp(event) {
     url: baseUrl + "user/add",
     data: params
   }).then(res => {
-    if (res.data === 401) {
+    if (res.data === 409) {
       alert("Username has already been taken");
     } else {
       sessionStorage.setItem("username", username);

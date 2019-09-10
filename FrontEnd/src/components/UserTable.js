@@ -3,6 +3,9 @@ import "./styles/Table.css";
 import User from "./User";
 
 function UserTable(props) {
+  if (props.users.length === 0) {
+    return <React.Fragment></React.Fragment>;
+  }
   let users = props.users.map((user, index) => {
     return <User key={index} {...user} />;
   });

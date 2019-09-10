@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { baseUrl, errColor, successColor, msgWeight } from "./Constants";
+import {
+  baseUrl,
+  errColor,
+  successColor,
+  msgWeight,
+  setCrenditals,
+  notAuthorized
+} from "./Constants";
 import "./styles/Modal.css";
 import HiddenMessage from "./HiddenMessage";
 
@@ -31,19 +38,21 @@ class AddCategory extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let name = event.target.elements.name.value;
-    const params = new URLSearchParams();
+    const params = setCrenditals();
     params.append("name", name);
     axios({
       method: "post",
       url: baseUrl + "category/add",
       data: params
-    }).then(res => {
-      if (res.data === 409) {
-        this.setState({ msg: name + errMsg, color: errColor });
-      } else {
-        this.setState({ msg: name + addMsg, color: successColor });
-      }
-    });
+    })
+      .then(res => {
+        if (res.data === 409) {
+          this.setState({ msg: name + errMsg, color: errColor });
+        } else {
+          this.setState({ msg: name + addMsg, color: successColor });
+        }
+      })
+      .catch(notAuthorized);
   }
 
   render() {

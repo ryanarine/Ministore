@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { baseUrl, errColor, successColor, msgWeight } from "./Constants";
+import {
+  baseUrl,
+  errColor,
+  successColor,
+  msgWeight,
+  setCrenditals,
+  notAuthorized
+} from "./Constants";
 import "./styles/Modal.css";
 import HiddenMessage from "./HiddenMessage";
 import Categories from "./Categories";
@@ -35,21 +42,23 @@ class DelCategory extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let category = event.target.elements.category.value;
-    const params = new URLSearchParams();
+    const params = setCrenditals();
     params.append("name", category);
     axios({
       method: "delete",
       url: baseUrl + "category/delete",
       data: params
-    }).then(res => {
-      if (res.data === 403) {
-        this.setState({ msg: conflictMsg, color: errColor });
-      } else if (res.data === 412) {
-        this.setState({ msg: category + errMsg, color: errColor });
-      } else {
-        this.setState({ msg: category + addMsg, color: successColor });
-      }
-    });
+    })
+      .then(res => {
+        if (res.data === 403) {
+          this.setState({ msg: conflictMsg, color: errColor });
+        } else if (res.data === 412) {
+          this.setState({ msg: category + errMsg, color: errColor });
+        } else {
+          this.setState({ msg: category + addMsg, color: successColor });
+        }
+      })
+      .catch(notAuthorized);
   }
 
   render() {

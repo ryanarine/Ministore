@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import Product from "./Product";
 import "./styles/Products.css";
 import axios from "axios";
-import { baseUrl, errColor, successColor, CUSTOMER } from "./Constants";
+import {
+  baseUrl,
+  errColor,
+  successColor,
+  CUSTOMER,
+  setCrenditals,
+  notAuthorized
+} from "./Constants";
 import HiddenMessage from "./HiddenMessage";
 import InventoryManagement from "./InventoryManagement";
 
@@ -37,27 +44,29 @@ class Products extends Component {
   // Handles what happens when a product is clicked
   clickedProduct(productId, productName) {
     if (this.state.delete) {
-      const params = new URLSearchParams();
+      const params = setCrenditals();
       params.append("id", productId);
       axios({
         method: "delete",
         url: baseUrl + "product/delete",
         data: params
-      }).then(res => {
-        if (res.data === 500) {
-          this.setState({
-            message: productName + errMsg,
-            msgColor: errColor,
-            msgTime: 10
-          });
-        } else {
-          this.setState({
-            message: productName + deletedMsg,
-            msgColor: successColor,
-            msgTime: 10
-          });
-        }
-      });
+      })
+        .then(res => {
+          if (res.data === 404) {
+            this.setState({
+              message: productName + errMsg,
+              msgColor: errColor,
+              msgTime: 10
+            });
+          } else {
+            this.setState({
+              message: productName + deletedMsg,
+              msgColor: successColor,
+              msgTime: 10
+            });
+          }
+        })
+        .catch(notAuthorized);
     }
   }
 

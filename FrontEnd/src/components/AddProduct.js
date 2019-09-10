@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import Categories from "./Categories";
 import axios from "axios";
-import { baseUrl, successColor } from "./Constants";
+import {
+  baseUrl,
+  successColor,
+  setCrenditals,
+  notAuthorized
+} from "./Constants";
 import "./styles/Modal.css";
 import HiddenMessage from "./HiddenMessage";
 
@@ -39,7 +44,7 @@ class AddProduct extends Component {
     } else {
       price = "$" + Number(price).toFixed(2);
       weight = Number(weight).toFixed(2) + unit;
-      const params = new URLSearchParams();
+      const params = setCrenditals();
       params.append("name", name);
       params.append("category", category);
       params.append("price", price);
@@ -48,7 +53,9 @@ class AddProduct extends Component {
         method: "post",
         url: baseUrl + "product/add",
         data: params
-      }).then(() => this.setState({ msg: name + addMsg }));
+      })
+        .then(() => this.setState({ msg: name + addMsg }))
+        .catch(notAuthorized);
     }
   }
 
@@ -83,14 +90,16 @@ class AddProduct extends Component {
               msg={this.state.msg}
               style={{ color: successColor }}
             />
-            <input type="submit" value="Submit" className="posButton" />
-            <button
-              type="button"
-              className="negButton"
-              onClick={this.setModalFalse}
-            >
-              Cancel
-            </button>
+            <div>
+              <input type="submit" value="Submit" className="posButton" />
+              <button
+                type="button"
+                className="negButton"
+                onClick={this.setModalFalse}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
         </div>
       );
