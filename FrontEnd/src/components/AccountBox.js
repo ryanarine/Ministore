@@ -12,7 +12,7 @@ function AccountBox(props) {
     );
   });
   return (
-    <form className="accountBox" onSubmit={props.submit}>
+    <form autoComplete="off" className="accountBox" onSubmit={props.submit}>
       {inputs}
       <input className="posButton" type="submit" value="Login" />
       <Link to="/">

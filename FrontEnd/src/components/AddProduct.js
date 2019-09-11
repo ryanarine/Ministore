@@ -60,6 +60,7 @@ class AddProduct extends Component {
       return (
         <div className="modal" onClickCapture={this.setModalFalse}>
           <form
+            autoComplete="off"
             className="modal-container"
             onSubmit={this.handleSubmit}
             onClickCapture={this.setModalTrue}

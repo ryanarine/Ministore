@@ -65,7 +65,12 @@ class BuyProduct extends Component {
   render() {
     return (
       <div className="modal" onClick={this.setModalFalse}>
-        <form className="modal-container" onSubmit={this.handleSubmit} onClick={this.setModalTrue}>
+        <form
+          autoComplete="off"
+          className="modal-container"
+          onSubmit={this.handleSubmit}
+          onClick={this.setModalTrue}
+        >
           <label> Are you sure you want to buy this product? </label>
           <label>
             {this.props.product.name} for ${this.props.product.price}
