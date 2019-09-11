@@ -5,7 +5,7 @@ import {
   errColor,
   successColor,
   msgWeight,
-  setCrenditals,
+  setSessionItems,
   notAuthorized
 } from "./Constants";
 import "./styles/Modal.css";
@@ -14,8 +14,7 @@ import Categories from "./Categories";
 
 const addMsg =
   " has been successfully deleted. Delete another category or refresh the page to see the changes.";
-const conflictMsg =
-  "You can only delete a category if there are no products belonging to it.";
+const conflictMsg = "You can only delete a category if there are no products belonging to it.";
 const errMsg =
   " has already been deleted. Delete another category or refresh the page to see the changes.";
 
@@ -42,7 +41,7 @@ class DelCategory extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let category = event.target.elements.category.value;
-    const params = setCrenditals();
+    const params = setSessionItems();
     params.append("name", category);
     axios({
       method: "delete",
@@ -52,7 +51,7 @@ class DelCategory extends Component {
       .then(res => {
         if (res.data === 403) {
           this.setState({ msg: conflictMsg, color: errColor });
-        } else if (res.data === 412) {
+        } else if (res.data === 404) {
           this.setState({ msg: category + errMsg, color: errColor });
         } else {
           this.setState({ msg: category + addMsg, color: successColor });
@@ -78,11 +77,7 @@ class DelCategory extends Component {
               msg={this.state.msg}
             />
             <input type="submit" value="Delete" className="posButton" />
-            <button
-              type="button"
-              className="negButton"
-              onClick={this.setModalFalse}
-            >
+            <button type="button" className="negButton" onClick={this.setModalFalse}>
               Cancel
             </button>
           </form>
@@ -90,10 +85,7 @@ class DelCategory extends Component {
       );
     }
     return (
-      <button
-        className="negButton"
-        onClick={() => this.setState({ modal: true })}
-      >
+      <button className="negButton" onClick={() => this.setState({ modal: true })}>
         Delete Category
       </button>
     );

@@ -7,14 +7,7 @@ function SignUp() {
   let labels = ["Display Name", "Username", "Password"];
   let types = ["text", "text", "password"];
   let names = ["namefield", "unamefield", "pswfield"];
-  return (
-    <AccountBox
-      submit={handleSignUp}
-      labels={labels}
-      types={types}
-      names={names}
-    />
-  );
+  return <AccountBox submit={handleSignUp} labels={labels} types={types} names={names} />;
 }
 
 function handleSignUp(event) {

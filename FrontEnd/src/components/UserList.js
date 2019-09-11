@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { baseUrl, getCrenditals, homeUrl } from "./Constants";
+import { baseUrl, getSessionItems, homeUrl } from "./Constants";
 import UserTable from "./UserTable";
 
 class UserList extends Component {
@@ -11,11 +11,11 @@ class UserList extends Component {
   }
 
   getUsers() {
-    let [username, hash] = getCrenditals();
+    let [username, hash] = getSessionItems();
     axios
       .get(baseUrl + "nonMasterUsers/" + username + "/" + hash)
       .then(res => this.setState({ list: res.data.list }))
-      .catch(() => (window.location = homeUrl));
+      .catch(() => (window.location = homeUrl + "login"));
   }
 
   render() {

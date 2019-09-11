@@ -24,10 +24,7 @@ function InventoryManagement(props) {
           Delete Product
         </button>
         <AddDelCategory />
-        <button
-          className="posButton"
-          onClick={() => (window.location = homeUrl + userlistUrl)}
-        >
+        <button className="posButton" onClick={() => (window.location = homeUrl + userlistUrl)}>
           View Users
         </button>
       </div>

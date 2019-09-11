@@ -1,3 +1,4 @@
+import axios from "axios";
 // URLs
 export const homeUrl = "http://localhost:3000/";
 export const baseUrl = "http://localhost:8080/";
@@ -11,12 +12,23 @@ export const STAFF = 1;
 export const CUSTOMER = 2;
 export const PrivledgeMap = ["Master", "Staff", "Customer"];
 // Functions
-export function getCrenditals() {
+export function getCredentials() {
+  let uname = sessionStorage.getItem("username");
+  let hash = sessionStorage.getItem("hash");
+  if (uname && hash) {
+    return axios({
+      method: "get",
+      url: baseUrl + "user/credentials/" + uname + "/" + hash
+    }).then(res => res.data);
+  }
+  return null;
+}
+export function getSessionItems() {
   let username = sessionStorage.getItem("username");
   let hash = sessionStorage.getItem("hash");
   return [username, hash];
 }
-export function setCrenditals() {
+export function setSessionItems() {
   let username = sessionStorage.getItem("username");
   let hash = sessionStorage.getItem("hash");
   const params = new URLSearchParams();
@@ -26,5 +38,9 @@ export function setCrenditals() {
 }
 export function notAuthorized() {
   alert("You are not authorized to perform this action. ");
+  window.location = homeUrl + "login";
+}
+export function notLoggedIn() {
+  alert("You need to be signed in to perform this action. ");
   window.location = homeUrl + "login";
 }

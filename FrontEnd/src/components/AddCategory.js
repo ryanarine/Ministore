@@ -5,7 +5,7 @@ import {
   errColor,
   successColor,
   msgWeight,
-  setCrenditals,
+  setSessionItems,
   notAuthorized
 } from "./Constants";
 import "./styles/Modal.css";
@@ -38,7 +38,7 @@ class AddCategory extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let name = event.target.elements.name.value;
-    const params = setCrenditals();
+    const params = setSessionItems();
     params.append("name", name);
     axios({
       method: "post",
@@ -72,11 +72,7 @@ class AddCategory extends Component {
               msg={this.state.msg}
             />
             <input type="submit" value="Add Category" className="posButton" />
-            <button
-              type="button"
-              className="negButton"
-              onClick={this.setModalFalse}
-            >
+            <button type="button" className="negButton" onClick={this.setModalFalse}>
               Cancel
             </button>
           </form>
@@ -84,10 +80,7 @@ class AddCategory extends Component {
       );
     }
     return (
-      <button
-        className="posButton"
-        onClick={() => this.setState({ modal: true })}
-      >
+      <button className="posButton" onClick={() => this.setState({ modal: true })}>
         Add Category
       </button>
     );

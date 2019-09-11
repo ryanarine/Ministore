@@ -1,59 +1,41 @@
-import React, { Component } from "react";
+import React from "react";
 import { homeUrl } from "./Constants";
 
-class Account extends Component {
-  constructor() {
-    super();
-    this.goToLogin = this.goToLogin.bind(this);
-    this.goToSignUp = this.goToSignUp.bind(this);
-    this.removeStorage = this.removeStorage.bind(this);
-  }
+function goToSignUp() {
+  window.location = homeUrl + "signup";
+}
 
-  goToSignUp() {
-    window.location = homeUrl + "signup";
-  }
+function goToLogin() {
+  window.location = homeUrl + "login";
+}
 
-  goToLogin() {
-    window.location = homeUrl + "login";
-  }
+function goToDeposit() {
+  window.location = homeUrl + "wallet";
+}
 
-  removeStorage() {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("hash");
-    window.location = homeUrl; // force refresh
-  }
+function removeStorage() {
+  sessionStorage.removeItem("username");
+  sessionStorage.removeItem("hash");
+  window.location = homeUrl; // force refresh
+}
 
-  render() {
-    if (this.props.name !== "") {
-      return (
-        <div>
-          <input
-            className="negButton"
-            type="submit"
-            value="Logout"
-            onClick={this.removeStorage}
-          />
-          <h3> Hello {this.props.name} </h3>
-        </div>
-      );
-    }
+function Account(props) {
+  if (props.name !== "") {
     return (
-      <div>
-        <input
-          className="neutralBg"
-          type="submit"
-          value="Sign Up"
-          onClick={this.goToSignUp}
-        />
-        <input
-          className="neutralBg"
-          type="submit"
-          value="Sign In"
-          onClick={this.goToLogin}
-        />
-      </div>
+      <React.Fragment>
+        <input className="negButton right" type="submit" value="Logout" onClick={removeStorage} />
+        <input className="posButton right" type="submit" value="Add Money" onClick={goToDeposit} />
+        <p className="right"> {"$" + Number(props.wallet).toFixed(2)}</p>
+        <h3 className="right"> Hello {props.name} </h3>
+      </React.Fragment>
     );
   }
+  return (
+    <React.Fragment>
+      <input className="neutralBg right" type="submit" value="Sign Up" onClick={goToSignUp} />
+      <input className="neutralBg right" type="submit" value="Sign In" onClick={goToLogin} />
+    </React.Fragment>
+  );
 }
 
 export default Account;

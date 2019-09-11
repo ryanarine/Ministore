@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import Categories from "./Categories";
 import axios from "axios";
-import {
-  baseUrl,
-  successColor,
-  setCrenditals,
-  notAuthorized
-} from "./Constants";
+import { baseUrl, successColor, setSessionItems, notAuthorized } from "./Constants";
 import "./styles/Modal.css";
 import HiddenMessage from "./HiddenMessage";
 
@@ -42,13 +37,14 @@ class AddProduct extends Component {
     if (isNaN(price) || isNaN(weight)) {
       alert("Invalid Input");
     } else {
-      price = "$" + Number(price).toFixed(2);
-      weight = Number(weight).toFixed(2) + unit;
-      const params = setCrenditals();
+      price = Number(price).toFixed(2);
+      weight = Number(weight).toFixed(2);
+      const params = setSessionItems();
       params.append("name", name);
       params.append("category", category);
       params.append("price", price);
       params.append("weight", weight);
+      params.append("unit", unit);
       axios({
         method: "post",
         url: baseUrl + "product/add",
@@ -86,17 +82,10 @@ class AddProduct extends Component {
             <label>lbs</label>
             <input type="radio" name="unit" value="oz" />
             <label>oz</label>
-            <HiddenMessage
-              msg={this.state.msg}
-              style={{ color: successColor }}
-            />
+            <HiddenMessage msg={this.state.msg} style={{ color: successColor }} />
             <div>
               <input type="submit" value="Submit" className="posButton" />
-              <button
-                type="button"
-                className="negButton"
-                onClick={this.setModalFalse}
-              >
+              <button type="button" className="negButton" onClick={this.setModalFalse}>
                 Cancel
               </button>
             </div>
@@ -105,10 +94,7 @@ class AddProduct extends Component {
       );
     }
     return (
-      <button
-        className="posButton"
-        onClick={() => this.setState({ modal: true })}
-      >
+      <button className="posButton" onClick={() => this.setState({ modal: true })}>
         Add Product
       </button>
     );

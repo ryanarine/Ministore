@@ -7,14 +7,7 @@ function Login() {
   let labels = ["Username", "Password"];
   let types = ["text", "password"];
   let names = ["unamefield", "pswfield"];
-  return (
-    <AccountBox
-      submit={handleLogin}
-      labels={labels}
-      types={types}
-      names={names}
-    />
-  );
+  return <AccountBox submit={handleLogin} labels={labels} types={types} names={names} />;
 }
 
 function handleLogin(event) {

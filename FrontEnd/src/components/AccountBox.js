@@ -6,7 +6,7 @@ function AccountBox(props) {
   const inputs = props.labels.map((label, index) => {
     return (
       <label key={index}>
-        {label}
+        {label + "\n"}
         <input type={props.types[index]} name={props.names[index]} required />
       </label>
     );

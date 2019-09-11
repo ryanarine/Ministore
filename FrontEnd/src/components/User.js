@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import {
-  baseUrl,
-  PrivledgeMap,
-  setCrenditals,
-  notAuthorized
-} from "./Constants";
+import { baseUrl, PrivledgeMap, setSessionItems, notAuthorized } from "./Constants";
 import axios from "axios";
 
 function changePrivledge(user, newPrivledge, callback) {
-  const params = setCrenditals();
+  const params = setSessionItems();
   params.append("user", user);
   params.append("privledge", newPrivledge);
   axios({
     method: "post",
-    url: baseUrl + "user/changePrivledge",
-    data: params
+    url: baseUrl + "user/changePrivledge"
   })
     .then(() => callback(newPrivledge))
     .catch(notAuthorized);
@@ -29,9 +23,7 @@ function User(props) {
       <td>{PrivledgeMap[privledge]}</td>
       <td>
         <button
-          onClick={() =>
-            changePrivledge(props.username, 3 - privledge, setPriv)
-          }
+          onClick={() => changePrivledge(props.username, 3 - privledge, setPriv)}
           className={PrivledgeMap[privledge]}
         >
           {"Change to " + PrivledgeMap[3 - privledge]}
