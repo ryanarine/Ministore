@@ -14,7 +14,7 @@ class Wallet extends Component {
 
   handleChange(event) {
     let value = event.target.value;
-    if (!isNaN(value)) {
+    if (!isNaN(value) && value >= 0) {
       this.setState({ deposit: value });
     }
   }
