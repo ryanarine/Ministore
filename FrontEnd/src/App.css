@@ -68,6 +68,10 @@ form label {
   display: block;
 }
 
+form label.inline {
+  display: inline;
+}
+
 form select {
   text-align: center;
   background-color: rgb(232, 240, 254);

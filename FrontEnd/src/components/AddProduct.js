@@ -73,15 +73,14 @@ class AddProduct extends Component {
             <label> Product Weight </label>
             <input type="text" name="weight" required />
             <label> Weight unit </label>
-            <br></br>
             <input type="radio" name="unit" value="g" required />
-            <label> g</label>
+            <label className="inline">g</label>
             <input type="radio" name="unit" value="kg" />
-            <label>kg</label>
+            <label className="inline">kg</label>
             <input type="radio" name="unit" value="lbs" />
-            <label>lbs</label>
+            <label className="inline">lbs</label>
             <input type="radio" name="unit" value="oz" />
-            <label>oz</label>
+            <label className="inline">oz</label>
             <HiddenMessage msg={this.state.msg} style={{ color: successColor }} />
             <div>
               <input type="submit" value="Submit" className="posButton" />
