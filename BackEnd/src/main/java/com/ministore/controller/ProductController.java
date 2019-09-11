@@ -2,6 +2,8 @@ package com.ministore.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ministore.model.Product;
-import com.ministore.model.User;
 import com.ministore.service.ProductService;
 import com.ministore.service.UserService;
 
@@ -25,6 +26,9 @@ public class ProductController {
 	private ProductService ps;
 	@Autowired
 	private UserService us;
+	private static final double KILOGRAMSTOGRAMS = 1000.0;
+	private static final double POUNDSTOGRAMS = 453.59;
+	private static final double OUNCESTOGRAMS = 28.35;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/product/add")
@@ -32,8 +36,19 @@ public class ProductController {
 		if (us.isStaff(req)) {
 			String name = req.getParameter("name");
 			String category = req.getParameter("category");
-			String price = req.getParameter("price");
-			String weight = req.getParameter("weight");
+			double price = Double.parseDouble(req.getParameter("price"));
+			DecimalFormat format = new DecimalFormat(".00");
+			price = Double.parseDouble(format.format(price));
+			double weight = Double.parseDouble(req.getParameter("weight"));
+			String unit = req.getParameter("unit");
+			switch(unit) {
+			case "g": break;
+			case "kg": weight *= KILOGRAMSTOGRAMS; break;
+			case "oz": weight *= OUNCESTOGRAMS; break;
+			case "lbs": weight *= POUNDSTOGRAMS; break;
+			default: res.sendError(HttpServletResponse.SC_BAD_REQUEST); break;
+			}
+			weight = Double.parseDouble(format.format(weight));
 			Product p = new Product(name, weight, category, price);
 			ps.add(p, category);
 		}

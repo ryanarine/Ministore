@@ -3,7 +3,6 @@ package com.ministore.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +22,7 @@ public class LoginController{
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(method = RequestMethod.POST, value ="/login")
-	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		PrintWriter out = res.getWriter();

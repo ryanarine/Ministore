@@ -29,6 +29,18 @@ public class UserService {
 		return (actualHash == null) ? false : Arrays.equals(actualHash, hash.getBytes());
 	}
 	
+	public void deposit(String username, double deposit) {
+		ur.increaseMoney(username, deposit);
+	}
+	
+	public boolean buy(String username, double price, int quantity) {
+		if (ur.getMoney(username) < price * quantity) {
+			return false; 
+		}
+		ur.increaseMoney(username, price * quantity * -1);
+		return true;
+	}
+	
 	public boolean isStaff(HttpServletRequest req) {
 		return isUserAllowed(req.getParameter("username"), req.getParameter("hash"), User.STAFF);
 	}
@@ -38,7 +50,7 @@ public class UserService {
 	}
 	
 	public boolean isUserAllowed(String username, String hash, int value) {
-		return validHash(username, hash) && ur.Privledge(username) <= value;
+		return validHash(username, hash) && ur.getPrivledge(username) <= value;
 	}
 	
 	public String getName(String username) {
@@ -46,7 +58,11 @@ public class UserService {
 	}
 	
 	public int getPrivledge(String username) {
-		return ur.Privledge(username);
+		return ur.getPrivledge(username);
+	}
+	
+	public double getWallet(String username) {
+		return ur.getMoney(username);
 	}
 	
 	public List<Object[]> getNonMasterUsers(){

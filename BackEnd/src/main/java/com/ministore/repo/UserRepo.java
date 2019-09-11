@@ -24,7 +24,10 @@ public interface UserRepo extends CrudRepository<User, String> {
 	public byte[] getPassword(String username);
 	
 	@Query("select u.privledge from User u where username = ?1")
-	public int Privledge(String username);
+	public int getPrivledge(String username);
+	
+	@Query("select u.money from User u where username = ?1")
+	public double getMoney(String username);
 	
 	@Query("select u.username, u.name, u.privledge from User u where u.privledge != ?1")
 	public List<Object[]> getNonMasterUsers(int masterPrivledge);
@@ -41,4 +44,9 @@ public interface UserRepo extends CrudRepository<User, String> {
 	@Modifying
 	@Query("update User u set u.privledge = ?2 where u.username = ?1")
 	public void changePrivledge(String username, int privledge);
+	
+	@Transactional
+	@Modifying
+	@Query("update User u set u.money = ?2 + u.money where u.username = ?1")
+	public void increaseMoney(String username, double deposit);
 }

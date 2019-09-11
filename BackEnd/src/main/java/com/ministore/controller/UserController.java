@@ -28,10 +28,8 @@ public class UserController {
 		res.setContentType("application/json");
 		PrintWriter out = res.getWriter();
 		if (us.validHash(username, hash)) {
-			out.print(String.format("{\"name\": \"%s\", \"privledge\": %d}", us.getName(username), us.getPrivledge(username)));
-		}
-		else {
-			out.print(String.format("{\"name\": \"%s\", \"privledge\": %d}", "", -1));
+			out.print(String.format("{\"name\": \"%s\", \"privledge\": %d, \"wallet\": %f}",
+				us.getName(username), us.getPrivledge(username), us.getWallet(username)));
 		}
 		out.close();
 	}

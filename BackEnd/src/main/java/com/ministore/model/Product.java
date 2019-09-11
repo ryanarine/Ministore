@@ -10,17 +10,18 @@ public class Product {
 	@Id @GeneratedValue
 	private long id;
 	
-	private String name, weight, category, price;
+	private String name, category;
+	private double weight, price;
 	
 	public Product() {
 		super();
-		this.name = "Default";
-		this.weight = "Default";
-		this.category = "Default";
-		this.price = "Default";
+		this.name = null;
+		this.weight = 0;
+		this.category = null;
+		this.price = 0;
 	}
 	
-	public Product(String name, String weight, String category, String price) {
+	public Product(String name, double weight, String category, double price) {
 		super();
 		this.name = name;
 		this.weight = weight;
@@ -36,11 +37,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(String weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
@@ -52,11 +53,11 @@ public class Product {
 		this.category = category;
 	}
 
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

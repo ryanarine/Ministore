@@ -12,11 +12,12 @@ public class User {
 	private byte[] hash;
 	private final byte[] salt;
 	private int privledge;
-	
+	private double money;
+
 	public static final int MASTER = 0;
 	public static final int STAFF = 1;
 	public static final int CUSTOMER = 2;
-	
+
 	private User() {
 		super();
 		this.username = null;
@@ -25,8 +26,9 @@ public class User {
 		this.hash = null;
 		this.salt = null;
 		this.privledge = CUSTOMER;
+		this.money = 0;
 	}
-	
+
 	public User(String username, byte[] password, String name, byte[] hash, byte[] salt) {
 		super();
 		this.username = username;
@@ -35,18 +37,43 @@ public class User {
 		this.hash = hash;
 		this.salt = salt;
 		this.privledge = CUSTOMER;
+		this.money = 0;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
+	public byte[] getPassword() {
+		return password;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
 	public byte[] getHash() {
 		return hash;
 	}
-
-	public void setHash(byte[] hash) {
-		this.hash = hash;
+	
+	public byte[] getSalt() {
+		return salt;
 	}
-
+	
 	public int getPrivledge() {
 		return privledge;
+	}
+
+	public double getMoney() {
+		return money;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setHash(byte[] hash) {
+		this.hash = hash;
 	}
 
 	public void setPrivledge(int privledge) {
@@ -56,23 +83,7 @@ public class User {
 		this.privledge = privledge;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public byte[] getSalt() {
-		return salt;
-	}
-
-	public byte[] getPassword() {
-		return password;
+	public void setMoney(double money) {
+		this.money = money;
 	}
 }
