@@ -1,5 +1,5 @@
 ## Project Overview
-This project is a pseudo E-Commerce website I am making with Java Spring and MySQL on the backend and React on the frontend.
+This project is a psuedo E-Commerce website I am made with Java's Spring framework and MySQL on the backend and React on the frontend.
 
 ### Features that have been added: <br>
 -Responsive product display <br>
@@ -39,5 +39,21 @@ This is a demo GIF that shows what the process of adding products to the databas
 ![Loading...](ProductAdd.gif)
 
 ### Product Deletion Demo <br>
-This is a demo GIF that shows what the process of deleting products from the database looks like. First it shows what happens when you click on the delete button and hover over a product. Then it shows how to exit out of delete mode and re-enter (I clicked on the Delete Me product to show that nothing gets deleted after you exit delete mode). Finally it shows the result of a deletion.
+This is a demo GIF that shows what the process of deleting products from the database looks like. At first a product is added to be deleted later. Then it shows what happens when you click on the delete button and hover over a product. Then it shows how to exit out of delete mode and re-enter (I clicked on the Delete Me product to show that no delete will occur after exiting delete mode). Finally it shows the result of a deletion and what happens when you try to delete a product again.
 ![Loading...](ProductDel.gif)
+
+### Category Adding and Deletion Demo <br>
+This is a demo GIF that shows the process of creating and deleting a category and what happens with invalid inputs such as adding a category twice. <br>
+![Loading...](CategoryAddDel.gif)
+
+### User Privledges Demo <br>
+This is a demo GIF that the user privledge functionality. At first the user Employee has STAFF privledges but then the Master user changes their privledges to CUSTOMER and then restores it back. <br>
+![Loading...](Privledge.gif)
+
+### Purchasing and Depositing Demo <br>
+This is a demo GIF that shows the process of buying a product from a customer's perspective. At first the user is not logged in, then the user must deposit some funds to purchase a product. <br>
+![Loading...](Buying.gif)
+
+### Security Demo <br>
+This is a demo GIF that shows what happens when someone manipulates the front end to change the database using the UI that is supposed to be exclusive to privledged users. Note that when I am at the user list page, I modify the access token by one character simulating a user impersonating the Master user. <br>
+![Loading...](Security.gif)
