@@ -8,7 +8,8 @@ function changePrivledge(user, newPrivledge, callback) {
   params.append("privledge", newPrivledge);
   axios({
     method: "post",
-    url: baseUrl + "user/changePrivledge"
+    url: baseUrl + "user/changePrivledge",
+    data: params
   })
     .then(() => callback(newPrivledge))
     .catch(notAuthorized);
