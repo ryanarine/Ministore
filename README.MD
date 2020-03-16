@@ -12,11 +12,6 @@ This project is a psuedo E-Commerce website I am made with Java's Spring framewo
 -A fake money system (Customers start with $0 but can add money to their wallet just by entering an amount) <br>
 -Ability for users to purchase products (Only their wallets get updated) <br>
 
-### Features that have yet to be added: <br>
--Pagination for product display <br>
--Product display shows a preview image if available <br>
--Ability to sort products by price or weight <br>
-
 ### Product Filtration Demo <br>
 This is a demo GIF that shows how the site currently looks like and highlights the filtration functionality. First it shows filtering by category, then by using the search bar, then both. <br>
 ![Loading...](Filter.gif)
